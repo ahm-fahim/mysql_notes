@@ -106,3 +106,40 @@ SHOW DATABASES;
 SHOW TABLES;
 ```
 
+---
+## **Lets practice sql with task** 
+---
+
+###  Task 1        
+Create a db for your x-company.create a table inside this db to store employee info(id, name, age, address, job_role ). Add 2 or 3 info on this table. And the last select and view table data. 
+
+### Solutions 
+
+```sql 
+CREATE DATABASE x_company;
+
+CREATE TABLE employee(
+    employee_id INT PRIMARY KEY,
+    employee_name VARCHAR(50),
+    employee_age INT NOT NULL,
+    employee_address VARCHAR(100),
+    employee_job_role VARCHAR(50)
+);
+
+INSERT INTO employee
+(employee_id, employee_name, employee_age, employee_address, employee_job_role) 
+VALUES 
+(1001, "MD. Fahim Morshed", 25, "Dhaka, Bangladesh" , "Manager"),
+(1002, "MD. Rahim Hasan", 25, "Dhaka, Bangladesh" , "Accountant"),
+(1003, "MD. Tarik Alam", 25, "Dhaka, Bangladesh" , "Marketing");
+
+
+SELECT * FROM employee;
+
+```
+
+
+
+
+
+
