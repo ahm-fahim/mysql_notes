@@ -138,6 +138,81 @@ SELECT * FROM employee;
 
 ```
 
+## Primary key VS Foreign key
+* PK is a column (or set of column) in a tables thats uniquely identifies each row. (a unique)There is only 1 PK and it should be Not Null.
+
+* FK is a column(or set of columns) in a tables that refers to the Primary Key in another table. It creates a link between the two. FK can have null and duplicates values. 
+
+---
+---
+---
+
+# MySQL Constraints & Data Integrity
+
+In MySQL, **constraints** are rules applied to columns or tables to limit the type of data that can be inserted. Their primary goal is to maintain **Data Integrity**—ensuring your database remains accurate, reliable, and consistent.
+
+---
+
+## 🚀 Primary Constraints in MySQL
+
+### 1. NOT NULL
+By default, a column can hold `NULL` values. The `NOT NULL` constraint forces a column to always contain a value. You cannot insert or update a record without providing data for this field.
+* **Example:** Ensuring every user has an `email_address`.
+
+### 2. UNIQUE
+Ensures that all values in a column are distinct. Unlike a Primary Key, you can have multiple `UNIQUE` constraints per table, and they can accept a `NULL` value.
+* **Example:** A `username` or `phone_number` where no two users should have the same entry.
+
+### 3. PRIMARY KEY
+A combination of `NOT NULL` and `UNIQUE`. It uniquely identifies each row in a table.
+* **Rule:** Only **one** Primary Key is allowed per table.
+
+### 4. FOREIGN KEY
+Used to prevent actions that would destroy links between tables. It ensures that the value in a column matches a value in another table's Primary Key.
+* **Referential Integrity:** Can be configured with `ON DELETE CASCADE` to automatically clean up related data.
+
+### 5. CHECK
+Ensures that all values in a column satisfy a specific condition.
+* **Example:** `CHECK (age >= 18)` ensures no minors are added to the table.
+
+### 6. DEFAULT
+Provides a fallback value for a column when no value is specified during an `INSERT` operation.
+* **Example:** Setting a `status` column to `'active'` automatically.
+
+### 7. CREATE INDEX
+Used to speed up data retrieval. Some indexes (like `UNIQUE INDEX`) also enforce data rules.
+
+---
+
+## 📊 Comparison Summary
+
+| Constraint | Purpose | Key Characteristic |
+| :--- | :--- | :--- |
+| **NOT NULL** | Prevent empty values | Column must have data |
+| **UNIQUE** | Prevent duplicates | Allows one NULL (usually) |
+| **PRIMARY KEY** | Unique Identifier | One per table; No NULLs |
+| **FOREIGN KEY** | Cross-table consistency | Links to another table |
+| **CHECK** | Logic validation | Checks a boolean condition |
+| **DEFAULT** | Fallback value | Used when data is missing |
+
+---
+
+## 💻 Implementation Example
+
+When creating a table, you can define these constraints directly:
+
+```sql
+CREATE TABLE employees (
+    emp_id INT PRIMARY KEY,                -- Primary Key
+    username VARCHAR(50) NOT NULL UNIQUE,  -- Not Null & Unique
+    age INT CHECK (age >= 18),             -- Check constraint
+    join_date DATE DEFAULT (CURRENT_DATE), -- Default value
+    dept_id INT,
+    FOREIGN KEY (dept_id) REFERENCES departments(dept_id) -- Foreign Key
+);
+```
+
+
 
 
 
